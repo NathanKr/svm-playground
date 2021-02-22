@@ -12,6 +12,6 @@ Use SVM for machine learning using a library - sklearn
     <td>
     <ul>
     <li>use linear kernel for classification</li>
-    <li>show the effect of regularization via C</li>
+    <li>show the effect of regularization via C. large C overfit - score is 100% while small C is more robust - margin</li>
   </tr>
 </table>
