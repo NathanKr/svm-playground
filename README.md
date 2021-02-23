@@ -21,6 +21,6 @@ Use SVM for machine learning using a library - sklearn
     <ul>
     <li>use nonlinear kernel - guasian for classification</li>
     <li>show the effect of regularization via C. large C overfit  non_linear_decision_boundary_C_100.png. small C is more robust  non_linear_decision_boundary_C_1.png</li>
-    <li>the decision boundary is computed using contour</li>
+    <li>the decision boundary is computed using contour. it might be suprising but it is working</li>
   </tr>
 </table>
