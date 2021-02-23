@@ -24,3 +24,11 @@ Use SVM for machine learning using a library - sklearn
     <li>the decision boundary is computed using contour. it might be suprising but it is working</li>
   </tr>
 </table>
+
+
+
+<h2>Further work</h2>
+<ul>
+<li>choosing optimal (score wise) value for C requires to use cross validation and test data set. this is not possible for ex6data1.mat because the dataset is small - 51 samples. But it is possible for ex6data2.mat ~ 860 samples</li>
+</ul>
+
