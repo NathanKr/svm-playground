@@ -35,10 +35,9 @@ def plot_contour(model_fitted):
     xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
                         np.arange(y_min, y_max, h))
 
-    Z = model_fitted.predict(np.c_[xx.ravel(), yy.ravel()])
-    # Put the result into a color plot
-    Z = Z.reshape(xx.shape)
-    plt.contour(xx, yy, Z)
+    H = model_fitted.predict(np.c_[xx.ravel(), yy.ravel()])
+    H = H.reshape(xx.shape)
+    plt.contour(xx, yy, H) # H is either 1 or 0
 
 def run(C):
     model_fitted = train(C) 
