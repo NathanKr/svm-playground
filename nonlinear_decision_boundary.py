@@ -6,8 +6,8 @@ import numpy as np
 
 X,y,x1,x2,m,ar_index_pass,ar_index_fail = load_dataset("ex6data2.mat")
 
-def show():
-    plt.title(f'data set : + : pass , o : fail')
+def plot_dataset(title):
+    plt.title(title)
     plt.xlabel("x1")
     plt.ylabel("x2")
     plt.plot(x1[ar_index_pass],x2[ar_index_pass],'+')
@@ -27,38 +27,24 @@ def train(C):
     y_fixed_for_fit = y.ravel() # required by model.fit
     return model.fit(X,y_fixed_for_fit) 
 
-# show()
-C=1
-model_fitted = train(C) 
+def plot_contour(model_fitted):
+    margin = 0.2
+    h = .02  # step size in the mesh
+    x_min, x_max = X[:, 0].min() - margin, X[:, 0].max() + margin
+    y_min, y_max = X[:, 1].min() - margin, X[:, 1].max() + margin
+    xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
+                        np.arange(y_min, y_max, h))
 
-h = .02  # step size in the mesh
+    Z = model_fitted.predict(np.c_[xx.ravel(), yy.ravel()])
+    # Put the result into a color plot
+    Z = Z.reshape(xx.shape)
+    plt.contour(xx, yy, Z)
 
-# create a mesh to plot in
-x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
-y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
-xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
-                     np.arange(y_min, y_max, h))
+def run(C):
+    model_fitted = train(C) 
+    plot_contour(model_fitted)
+    plot_dataset(f'data set : + : pass , o : fail vs SVM nonlinear decision boundary C = {C} (guasian kernel )')
 
-Z = model_fitted.predict(np.c_[xx.ravel(), yy.ravel()])
-# Put the result into a color plot
-Z = Z.reshape(xx.shape)
-plt.contourf(xx, yy, Z,  alpha=0.8)
-
-# Plot also the training points
-# plt.scatter(X[:, 0], X[:, 1], c=y)
-# plt.xlabel('Sepal length')
-# plt.ylabel('Sepal width')
-# plt.xlim(xx.min(), xx.max())
-# plt.ylim(yy.min(), yy.max())
-# plt.xticks(())
-# plt.yticks(())
-# plt.title(titles[i])
-plt.show()
-
-# # Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
-# Z = model_fitted.predict(X)
-
-# # Put the result into a color plot
-# Z = Z.reshape(X.shape)
-# # plt.contourf(X, y, Z, cmap=plt.cm.coolwarm, alpha=0.8)
-# plt.contourf(X, y, Z)
+plot_dataset(f'data set : + : pass , o : fail')
+run(C=1)
+run(C=100) # overfit
